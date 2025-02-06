@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Grid, Typography, Box, Button, CircularProgress } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, } from "react-router-dom";
 import ItemCard from "../components/ItemCard"; // Assuming you have ItemCard component
 import { PRODUCTS } from "../constants/products";
 
 const ItemsPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
-
+  const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -36,7 +36,7 @@ const ItemsPage = () => {
 
           {/* Call to Action */}
           <Box sx={{ textAlign: "center", marginTop: 4 }}>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={()=>navigate("/cart")}>
               View Cart
             </Button>
           </Box>
