@@ -2,6 +2,7 @@ import { AppBar, Toolbar, Typography, Box, IconButton, Drawer, List, ListItem, L
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import { ROUTES } from "../routes/AppRoutes";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,9 +23,12 @@ const Header = () => {
       <AppBar position="sticky" sx={{ bgcolor: "primary.main", px: 2 }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           {/* Left: Logo */}
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            E-Shop
-          </Typography>
+          <Link to={ROUTES.HOME} style={{ textDecoration: "none", color: "inherit" }}>
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+              E-Shop
+            </Typography>
+          </Link>
+
 
           {/* Center: Desktop Navigation */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3 }}>
