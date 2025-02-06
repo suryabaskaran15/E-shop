@@ -1,0 +1,15 @@
+import smartwatch from "./image.png"
+import handbad from "./image copy.png"
+import laptop from "./image copy 2.png"
+import speaker from "./image copy 3.png"
+import MLJ from "./image copy 4.png"
+import shoe from "./image copy 5.png"
+import watch from "./image copy 6.png"
+import sunglass from "./image copy 7.png"
+import air from "./image copy 8.png"
+import machine from "./image copy 9.png"
+import vaccum from "./image copy 10.png"
+import sheet from "./image copy 11.png"
+import cooking from "./image copy 12.png"
+
+export { smartwatch, handbad, laptop, speaker, MLJ, sheet, shoe, sunglass, watch, machine, vaccum, cooking, air }
