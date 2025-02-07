@@ -118,7 +118,7 @@ const Header = () => {
                       "&:hover": { bgcolor: "action.hover" },
                     }}
                   >
-                    {item.count !== undefined ? (
+                    {!!item.count ? (
                       <Badge badgeContent={item.count} color="secondary">
                         {item.icon}
                       </Badge>
