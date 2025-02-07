@@ -15,7 +15,7 @@ const HomePage = () => {
   // Simulating fetching categories and featured items from an API
   useEffect(() => {
     setFilteredItems(PRODUCTS.slice(0, 5));
-    dispatch(setCategories(["Electronics", "Fashion", "Home & Kitchen", "All"])); // Add "All" category
+    dispatch(setCategories(["Electronics", "Fashion", "Home & Kitchen", "All"])); 
   }, [dispatch]);
 
   // Filter products based on selected category
