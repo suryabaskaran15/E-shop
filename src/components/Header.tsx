@@ -1,8 +1,23 @@
-import { AppBar, Toolbar, Typography, Box, IconButton, Drawer, List, ListItem, ListItemText } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Badge,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong"; // Order Icon
 import { useState } from "react";
 import { ROUTES } from "../routes/AppRoutes";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -11,11 +26,15 @@ const Header = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  // Menu items
+  // Sample counts (Replace with actual Redux/Context state)
+  const cartCount = useSelector((state:RootState)=>state.cart.items).length; 
+  const orderCount = useSelector((state:RootState)=>state.order.orders).length; 
+
+  // Menu items with icons
   const menuItems = [
     { label: "Home", path: "/" },
-    { label: "Cart", path: "/cart" },
-    { label: "Orders", path: "/orders" },
+    { label: "Cart", path: "/cart", icon: <ShoppingCartIcon />, count: cartCount },
+    { label: "Orders", path: "/orders", icon: <ReceiptLongIcon />, count: orderCount },
   ];
 
   return (
@@ -29,23 +48,44 @@ const Header = () => {
             </Typography>
           </Link>
 
-
           {/* Center: Desktop Navigation */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3 }}>
             {menuItems.map((item) => (
-              <Typography
-                key={item.label}
-                component={Link}
-                to={item.path}
-                sx={{
-                  color: "inherit",
-                  textDecoration: "none",
-                  fontSize: "1rem",
-                  "&:hover": { textDecoration: "underline" },
-                }}
-              >
-                {item.label}
-              </Typography>
+              <Box key={item.label} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                {item.count !== undefined ? (
+                  <Badge badgeContent={item.count} color="secondary">
+                    <Typography
+                      component={Link}
+                      to={item.path}
+                      sx={{
+                        color: "inherit",
+                        textDecoration: "none",
+                        fontSize: "1rem",
+                        "&:hover": { textDecoration: "underline" },
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 0.5,
+                      }}
+                    >
+                      {item.icon}
+                      {item.label}
+                    </Typography>
+                  </Badge>
+                ) : (
+                  <Typography
+                    component={Link}
+                    to={item.path}
+                    sx={{
+                      color: "inherit",
+                      textDecoration: "none",
+                      fontSize: "1rem",
+                      "&:hover": { textDecoration: "underline" },
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                )}
+              </Box>
             ))}
           </Box>
 
@@ -71,11 +111,18 @@ const Header = () => {
                       color: "inherit",
                       textDecoration: "none",
                       fontSize: "1rem",
-                      display: "block",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
                       p: 2,
                       "&:hover": { bgcolor: "action.hover" },
                     }}
                   >
+                    {item.count !== undefined ? (
+                      <Badge badgeContent={item.count} color="secondary">
+                        {item.icon}
+                      </Badge>
+                    ) : null}
                     {item.label}
                   </Typography>
                 }
